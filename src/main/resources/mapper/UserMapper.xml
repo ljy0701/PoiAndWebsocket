@@ -1,0 +1,20 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.liu.project0811.mapper.UserMapper">
+
+    <resultMap id="baseMap" type="com.liu.project0811.pojo.User">
+        <id column="ID" property="ID"></id>
+        <result column="U_ACCOUNT" property="U_ACCOUNT"></result>
+        <result column="U_NAME" property="U_NAME"></result>
+    </resultMap>
+
+    <select id="doLogin" resultMap="baseMap">
+        select ID,U_ACCOUNT,U_NAME from t_users where U_ACCOUNT = #{account} and U_PASSWORD = #{password}
+    </select>
+
+    <select id="getFriends" resultMap="baseMap">
+        SELECT b.ID,B.U_ACCOUNT,B.U_NAME from relationship a left join t_users b  on a.userIdTwo = b.ID where a.userIdOne = #{id}
+    </select>
+</mapper>

@@ -1,0 +1,27 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.liu.project0811.mapper.ChatRecordMapper">
+
+<!--    <resultMap id="baseMap" type="">-->
+<!--        <id column="" property=""></id>-->
+<!--        <result column="" property=""></result>-->
+<!--        <result column="" property=""></result>-->
+<!--        <result column="" property=""></result>-->
+<!--        <result column="" property=""></result>-->
+<!--        <result column="" property=""></result>-->
+<!--        <result column="" property=""></result>-->
+<!--        <result column="" property=""></result>-->
+<!--        <result column="" property=""></result>-->
+<!--    </resultMap>-->
+
+    <select id="getRecord" resultType="com.liu.project0811.pojo.ChatRecord">
+        select * from chatrecord where (fromUserId = #{fid} and toUserId = #{tid}) or (fromUserId = #{tid} and toUserId = #{fid}) order by createTime asc
+    </select>
+
+
+    <insert id="addRecord">
+        insert into chatrecord (fromUserId,toUserId,content,createTime) values (#{chatRecord.fromUserId},#{chatRecord.toUserId},#{chatRecord.content},sysdate())
+    </insert>
+</mapper>
